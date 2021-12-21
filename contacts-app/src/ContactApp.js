@@ -3,9 +3,9 @@ import ContactList from './components/ContactList'
 
 export default function ContactApp() {
     return (
-        <div>
-            Contact App
-            <ContactList/>
+        <div  className="columns is-mobile is-centered">
+           
+            <ContactList />
         </div>
     )
 }
