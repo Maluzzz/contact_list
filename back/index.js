@@ -1,12 +1,13 @@
 var express=require('express')
 var app=express()
+const cors = require("cors");
 
 const contacts = [
     {name: 'Mike', surname: 'Bolt', email: 'mike.bolt@gmail.com', phone: '+44788839923'},
     {name: 'John', surname: 'Runner', email: 'john@gmail.com', phone: '+44788839923'},
     {name: 'walt', surname: 'Disney', email: 'walt@gmail.com', phone: '+44788839923'},
 ]
-
+app.use(cors())
 app.get('/list',function(req,res) {
     res.send(
         [
