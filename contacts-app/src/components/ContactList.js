@@ -1,16 +1,12 @@
-import React, { useEffect,useState } from 'react'
-import getList from '../helpers/getList'
+import React from 'react'
+
 import ContactInfo from './ContactInfo'
 
-export default function ContactList() {
-    const [contacts, setContacts] = useState([])
-    useEffect(() => {
-        getList().then((contactsList) => setContacts(contactsList))
-      }, [])
-
+export default function ContactList({contacts}) {
     return (
-        <div>
-            {contacts.map(contact => {return (<ContactInfo {...contact}/>)})}
-        </div>
+        <>
+            {contacts.length === 0 && 'Ups, No contacts'}        
+            {contacts.map(contact => {return (<ContactInfo key={contact.email} {...contact}/>)})}
+        </>
     )
 }
