@@ -1,7 +1,5 @@
-const LIST_URL =
-  process.env.NODE_ENV === 'production'
-    ? 'https://back-contc.vercel.app/list'
-    : 'http://127.0.0.1:3000/list'
+import { LIST_URL } from "./endpoints"
+
 
 export const getList = async () => {
     const url = LIST_URL

@@ -1,23 +1,32 @@
-import React, {useEffect, useState} from "react"
+import React, {useState} from "react"
+import AddContactForm from "./components/AddContactForm"
 import ContactList from "./components/ContactList"
-import {getList} from "./helpers/getList"
+
 import SearchBar from "./components/SearchBar"
 
+import {useContacts} from "./hooks/useContacts"
+
 export default function ContactApp() {
-  const [contacts, setContacts] = useState([])
+  const [contacts, addContact, removeContact, error] = useContacts()
   const [contactsFilter, setFilter] = useState(null)
-  useEffect(() => {
-    getList().then((contactsList) => setContacts(contactsList))
-  }, [])
 
   return (
-    <div className="columns is-mobile is-centered">
-      <div>
-        <div className="columns is-mobile is-centered">
+    <div>
+      {error && <div class="notification is-danger">
+        <button class="delete"></button>
+            {error}
+      </div>}
+      <div className="columns">
+        <div className="column is-half">
           <SearchBar contacts={contacts} setFilter={setFilter}></SearchBar>
-         {/*<button class="button is-primary">Add Contact</button>*/}
+          <ContactList
+            contacts={contactsFilter ? contactsFilter : contacts}
+            removeContact={removeContact}
+          />
         </div>
-        <ContactList contacts={contactsFilter ? contactsFilter : contacts} />
+        <div className="column is-half">
+          <AddContactForm addContact={addContact} />
+        </div>
       </div>
     </div>
   )
