@@ -1,8 +1,14 @@
 import React from "react"
 
-
-export default function ContactInfo({name, surname, email, phone, removeContact}) {
-
+export default function ContactInfo({
+  name,
+  surname,
+  email,
+  phone,
+  removeContact,
+  selectContact,
+  setEditVisibility,
+}) {
   return (
     <div className="box ">
       <p className="title">{name + " " + surname}</p>
@@ -12,8 +18,21 @@ export default function ContactInfo({name, surname, email, phone, removeContact}
       <div>
         <span>📞</span> {phone}
       </div>
-      <button className="button is-small is-danger" onClick={() => removeContact(email)}>Remove</button>
-      <button className="button is-small is-primary" onClick={() => console.log('button-progress')}>Edit</button>
+      <button
+        className="button is-small is-danger"
+        onClick={() => removeContact(email)}
+      >
+        Remove
+      </button>
+      <button
+        className="button is-small is-primary"
+        onClick={() => {
+          selectContact(email)
+          setEditVisibility(true)
+        }}
+      >
+        Edit
+      </button>
     </div>
   )
 }

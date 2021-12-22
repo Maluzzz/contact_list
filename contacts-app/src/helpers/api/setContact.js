@@ -16,7 +16,7 @@ export const setContact = async (email,name,surname,phone) => {
   })
   const list = await response.json()
   if (list.error){
-    throw 'Contact Error'
+    throw new Error('Contact Error User Already Exist') //TO.DO handle more errors
   }
   return list
 }

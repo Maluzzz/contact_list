@@ -1,30 +1,38 @@
-import React, {useState} from "react"
+import React, {useEffect, useState} from "react"
 
-export const AddContactForm = ({addContact, visibleFormContact, setVisibleFormContact}) => {
-  const [state, setState] = useState({})
+export const EditContactForm = ({editContact,name='',email='',phone='',surname='',visibleEdit,setEditVisibility}) => {
+  const [state, setState] = useState({
+    name:name,email: email,phone: phone,surname: surname
+  })
+  useEffect(() => {
+     setState({
+        name:name,email: email,phone: phone,surname: surname
+      })
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [email])//This will be the uuiid
+
   const handleChange = (e) => {
     const {name, value} = e.target
     setState({...state, [name]: value})
-  }
-  if(!visibleFormContact){
+  } 
+  if(!visibleEdit){
     return null
   }
 
   return (
-    <div className="column  ">
-    <div  style={{display:'flex', justifyContent:'space-between'}}
+    <div className='column is-full'>
+       <div  style={{display:'flex', justifyContent:'space-between'}}
     >
      <div className="title">New contact</div>
       <button
         className="delete is-small "
-        onClick={() => setVisibleFormContact(false)}
+        onClick={() => setEditVisibility(false)}
       ></button>
     </div>
     <form
       onSubmit={(e) => {
         e.preventDefault()
-        addContact(state)
-        
+        editContact(state)
       }}
     >
       <div className="field">
@@ -32,7 +40,7 @@ export const AddContactForm = ({addContact, visibleFormContact, setVisibleFormCo
         <div className="control">
           <input
             name="name"
-
+            value={state.name}
             onChange={handleChange}
             className="input"
             type="text"
@@ -47,6 +55,7 @@ export const AddContactForm = ({addContact, visibleFormContact, setVisibleFormCo
             onChange={handleChange}
             className="input"
             type="text"
+        
             placeholder="Surname"
           />
         </div>
@@ -57,6 +66,7 @@ export const AddContactForm = ({addContact, visibleFormContact, setVisibleFormCo
             onChange={handleChange}
             className="input"
             type="email"
+            disabled
             value={state.email}
             placeholder="Email"
           />
@@ -65,6 +75,7 @@ export const AddContactForm = ({addContact, visibleFormContact, setVisibleFormCo
         <div className="control">
           <input
             name="phone"
+            
             value={state.phone}
             onChange={handleChange}
             className="input"
@@ -76,7 +87,7 @@ export const AddContactForm = ({addContact, visibleFormContact, setVisibleFormCo
       <div className="field is-grouped">
         <div className="control">
           <button className="button is-primary" type="submit">
-            New Contact
+            Edit Contact
           </button>
         </div>
       </div>
@@ -85,4 +96,4 @@ export const AddContactForm = ({addContact, visibleFormContact, setVisibleFormCo
   )
 }
 
-export default AddContactForm
+export default EditContactForm

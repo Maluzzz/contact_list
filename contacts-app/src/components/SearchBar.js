@@ -1,5 +1,5 @@
 import React from "react"
-import {searchContacts} from "../helpers/searchContacts"
+import {searchContacts} from "../helpers/utils"
 
 export default function SearchBar({contacts, setFilter}) {
   const handleChange = (e) => {
