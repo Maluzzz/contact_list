@@ -1,14 +1,13 @@
 import React from "react"
+import { useContacts } from "../../hooks/useContacts"
 
 export default function ContactInfo({
   name,
   surname,
   email,
   phone,
-  removeContact,
-  selectContact,
-  setEditVisibility,
 }) {
+  const {removeContact} = useContacts()
   return (
     <div className="box ">
       <p className="title">{name + " " + surname}</p>
@@ -24,15 +23,11 @@ export default function ContactInfo({
       >
         Remove
       </button>
-      <button
+      <a  href={'/edit-contact?email='+ email}
         className="button is-small is-primary"
-        onClick={() => {
-          selectContact(email)
-          setEditVisibility(true)
-        }}
       >
         Edit
-      </button>
+      </a>
     </div>
   )
 }

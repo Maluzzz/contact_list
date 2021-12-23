@@ -5,32 +5,28 @@ import {rmContact} from "../helpers/api/rmContact"
 import {modifyContact} from "../helpers/api/modifyContact"
 
 export const useContacts = () => {
-  //TO.DO: handle and return errorMessage
-  const [state, setState] = useState({
-    contacts: [],
-    error: false,
-    currentContact: {},
-  })
-  
+  //TO.DO: handle and return all errorMessage
+  const [contacts, setContacts] = useState([])
+
   useEffect(() => {
-    getList().then((res) => setState({contacts: res}))
+    getList().then((res) => setContacts( res))
   }, [])
-  
+
   const addContact = ({email, name, surname, phone}) => {
     setContact(email, name, surname, phone)
-      .then((res) => setState({contacts: res}))
-      .catch((err) => setState({...state, error: err.message}))
+      .then((res) => setContacts(res))
+      .catch((err) => console.err(err))
   }
   const removeContact = (email) => {
     //TO.DO HANDLE ERRORS
-    rmContact(email).then((res) => setState({contacts: res}))
+    rmContact(email).then((res) => setContacts(res))
   }
 
   const editContact = ({email, name, surname, phone}) => {
     modifyContact(email, name, surname, phone)
-      .then((res) => setState({contacts: res}))
-      .catch((err) => setState({...state, error: err.message}))
+      .then((res) => setContacts(res))
+      .catch((err) => console.err(err))
   }
 
-  return [state, addContact, removeContact, editContact]
+  return {contacts, addContact, removeContact, editContact}
 }

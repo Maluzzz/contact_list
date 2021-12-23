@@ -1,18 +1,13 @@
 import React from "react"
-import {searchContacts} from "../helpers/utils"
 
-export default function SearchBar({contacts, setFilter}) {
-  const handleChange = (e) => {
-    const {value} = e.target
-    setFilter(searchContacts(value, contacts))
-  }
+export default function SearchBar({onChange}) {
   return (
     <div>
       <input
         className="input is-primary"
         type="text"
         placeholder="Filter Contacts"
-        onChange={handleChange}
+        onChange={(e) => onChange(e.target.value)}
       ></input>
     </div>
   )
