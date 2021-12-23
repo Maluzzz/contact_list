@@ -1,24 +1,23 @@
-import Form from "../components/contact/Form"
-import React, {useEffect, useMemo, useState} from "react"
-import {useLocation} from "react-router"
+import Form from '../components/contact/Form'
+import React, { useEffect, useMemo, useState } from 'react'
+import { useLocation } from 'react-router'
 
-
-import { searchContacts } from "../helpers/utils"
-import { useContacts } from "../hooks/useContacts"
+import { searchContacts } from '../helpers/utils'
+import { useContacts } from '../hooks/useContacts'
 
 const EditContact = () => {
   const [contactInfo, setContactInfo] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    surname: "",
-    email: "",
+    name: '',
+    email: '',
+    phone: '',
+    surname: '',
+    email: ''
   })
 
-  const {search} = useLocation()
-  const {contacts, editContact} = useContacts()
+  const { search } = useLocation()
+  const { contacts, editContact } = useContacts()
 
-  const email = search.split("email=")[1]
+  const email = search.split('email=')[1]
   const contact = useMemo(
     () => searchContacts(email, contacts)?.[0],
     [contacts, email]
@@ -30,14 +29,14 @@ const EditContact = () => {
         name: contact?.name,
         phone: contact?.phone,
         surname: contact?.surname,
-        email,
+        email
       })
     }
   }, [email, contact])
 
   const handleChange = (e) => {
-    const {name, value} = e.target
-    setContactInfo({...contactInfo, [name]: value})
+    const { name, value } = e.target
+    setContactInfo({ ...contactInfo, [name]: value })
   }
 
   const handleSubmit = (e) => {
@@ -45,14 +44,17 @@ const EditContact = () => {
     editContact(contactInfo)
   }
 
-
   return (
-    <div className="column is-full">
-      <div style={{display: "flex", justifyContent: "space-between"}}>
-        <div className="title">Edit Contact</div>
-        <a className="delete is-small " href="/"></a>
+    <div className='column is-full'>
+      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+        <div className='title'>Edit Contact</div>
+        <a className='delete is-small ' href='/'></a>
       </div>
-      <Form handleSubmit={handleSubmit} handleChange={handleChange} contactInfo={contactInfo}/>
+      <Form
+        handleSubmit={handleSubmit}
+        handleChange={handleChange}
+        contactInfo={contactInfo}
+      />
     </div>
   )
 }

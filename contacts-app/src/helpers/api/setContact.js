@@ -1,22 +1,23 @@
-import {ADD_URL} from "./endpoints"
+import { ADD_URL } from './endpoints'
 
-export const setContact = async (email,name,surname,phone) => {
+export const setContact = async (email, name, surname, phone) => {
   const url = ADD_URL
   const response = await fetch(url, {
-    method: "POST",
+    method: 'POST',
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json'
     },
     body: JSON.stringify({
-      name:name,
+      name: name,
       surname: surname,
       email: email,
-      phone: phone,
-    }),
+      phone: phone
+    })
   })
   const list = await response.json()
-  if (list.error){
-    throw new Error('Contact Error User Already Exist') //TO.DO handle more errors
+  if (list.error) {
+    // TO.DO handle more errors
+    throw new Error('Contact Error User Already Exist')
   }
   return list
 }

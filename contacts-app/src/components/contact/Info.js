@@ -1,16 +1,18 @@
-import React from "react"
-import { useContacts } from "../../hooks/useContacts"
+import React from 'react'
+
+import { useContacts } from '../../hooks/useContacts'
 
 export default function ContactInfo({
   name,
   surname,
   email,
-  phone,
+  phone
 }) {
-  const {removeContact} = useContacts()
+  const { removeContact } = useContacts()
+
   return (
-    <div className="box ">
-      <p className="title">{name + " " + surname}</p>
+    <div className='box '>
+      <p className='title'>{name + ' ' + surname}</p>
       <div>
         <span>✉️</span> {email}
       </div>
@@ -18,13 +20,13 @@ export default function ContactInfo({
         <span>📞</span> {phone}
       </div>
       <button
-        className="button is-small is-danger"
+        className='button is-small is-danger'
         onClick={() => removeContact(email)}
       >
         Remove
       </button>
-      <a  href={'/edit-contact?email='+ email}
-        className="button is-small is-primary"
+      <a href={'/edit-contact?email=' + email}
+        className='button is-small is-primary'
       >
         Edit
       </a>
