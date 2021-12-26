@@ -1,7 +1,7 @@
-import { ADD_URL } from './endpoints'
-
-export const setContact = async (email, name, surname, phone) => {
-  const url = ADD_URL
+import { contact } from '../../types'
+import { EDIT_URL } from './endpoints'
+export const modifyContact = async ({email, name, surname, phone}:contact) => {
+  const url = EDIT_URL
   const response = await fetch(url, {
     method: 'POST',
     headers: {

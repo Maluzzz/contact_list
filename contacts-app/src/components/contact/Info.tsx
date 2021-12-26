@@ -1,13 +1,14 @@
 import React from 'react'
 
 import { useContacts } from '../../hooks/useContacts'
+import { contact } from '../../types'
 
 export default function ContactInfo({
   name,
   surname,
   email,
   phone
-}) {
+}: contact) {
   const { removeContact } = useContacts()
 
   return (

@@ -1,4 +1,6 @@
-export const searchContacts = (filterString, contacts) =>
+import { contact } from '../types'
+
+export const searchContacts = (filterString:string, contacts:contact[]) =>
   contacts.filter((contact) => {
     const data =
       contact.name +

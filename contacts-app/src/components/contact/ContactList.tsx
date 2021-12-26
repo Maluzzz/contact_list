@@ -1,8 +1,9 @@
 import React from 'react'
+import { contact } from '../../types'
 
 import ContactInfo from './Info'
 
-export default function ContactList({ contacts }) {
+const ContactList = ({ contacts }:{contacts: contact[]}) => {
   return (
     <>
       {contacts.length === 0 && 'Ups, No contacts'}
@@ -12,3 +13,4 @@ export default function ContactList({ contacts }) {
     </>
   )
 }
+export default ContactList

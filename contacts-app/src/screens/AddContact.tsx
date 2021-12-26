@@ -13,12 +13,12 @@ const AddContact = () => {
   })
   const { addContact } = useContacts()
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: any) => { 
     e.preventDefault()
     addContact(contactInfo)
   }
 
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<{ value: string, name: string }>) => {
     const { name, value } = e.target
     setContactInfo({ ...contactInfo, [name]: value })
   }

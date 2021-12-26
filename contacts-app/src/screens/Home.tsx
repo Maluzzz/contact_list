@@ -1,6 +1,6 @@
 import React from 'react'
 import { useMemo, useState } from 'react'
-import ContactList from '../components/contact/List'
+import ContactList from '../components/contact/ContactList'
 import SearchBar from '../components/SearchBar'
 import { searchContacts } from '../helpers/utils'
 import { useContacts } from '../hooks/useContacts'

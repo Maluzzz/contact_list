@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function SearchBar({ onChange }) {
+export default function SearchBar({ onChange }:{onChange: (s:string)=>void}) {
   return (
     <div>
       <input
@@ -8,7 +8,7 @@ export default function SearchBar({ onChange }) {
         type='text'
         placeholder='Filter Contacts'
         onChange={(e) => onChange(e.target.value)}
-      ></input>
+      />
     </div>
   )
 }

@@ -1,9 +1,9 @@
 import { RM_URL } from './endpoints'
 
-export const rmContact = async (email) => {
+export const rmContact = async (email:string) => {
   const url = RM_URL
   const response = await fetch(url, {
-    method: 'POST',
+    method: 'DELETE',
     headers: {
       'Content-Type': 'application/json'
     },

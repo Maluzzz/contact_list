@@ -8,7 +8,6 @@ import { useContacts } from '../hooks/useContacts'
 const EditContact = () => {
   const [contactInfo, setContactInfo] = useState({
     name: '',
-    email: '',
     phone: '',
     surname: '',
     email: ''
@@ -34,12 +33,12 @@ const EditContact = () => {
     }
   }, [email, contact])
 
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<{ value: string, name: string }>) => {
     const { name, value } = e.target
     setContactInfo({ ...contactInfo, [name]: value })
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: any) => {
     e.preventDefault()
     editContact(contactInfo)
   }

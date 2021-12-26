@@ -1,9 +1,15 @@
 import React from 'react'
+import { contact } from '../../types'
 
-export const Form = ({ handleChange, handleSubmit, contactInfo }) => {
+export const Form = ({ handleChange, handleSubmit, contactInfo }:
+  {
+    handleChange: (e: React.ChangeEvent<{ value: string, name: string }>) => void,
+    handleSubmit: React.FormEventHandler<HTMLFormElement>, 
+    contactInfo: contact
+  }) => {
   return (
 
-    <form onSubmit={(e) => handleSubmit(e)}>
+    <form onSubmit={handleSubmit}>
       <div className='field'>
         <label className='label'>Name</label>
         <div className='control'>
@@ -53,7 +59,7 @@ export const Form = ({ handleChange, handleSubmit, contactInfo }) => {
       <div className='field is-grouped'>
         <div className='control'>
           <button className='button is-primary' type='submit'>
-              New Contact
+            New Contact
           </button>
         </div>
       </div>
