@@ -5,7 +5,6 @@ const router = Router()
 
 router.get('/', getContacts)
 router.get('/:id', getContact)
-router.put('/:id', putContact)
 router.post('/', postContact)
 router.delete('/:id', deleteContact)
 

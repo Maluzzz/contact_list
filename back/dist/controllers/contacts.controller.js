@@ -42,13 +42,18 @@ const postContact = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
             }
         });
         if (emailExisted) {
-            return res.status(400).json({
-                error: `Contact ${body.email} Already Exist`
+            const history = new history_1.default(Object.assign(Object.assign({}, body), { id_contact: parseInt(emailExisted.id) }));
+            yield emailExisted.update(body);
+            history.save();
+            res.json({ success: 'Contact Edited' });
+        }
+        else {
+            const contact = new contact_1.default(body);
+            yield contact.save();
+            res.json({
+                success: 'Contact Created'
             });
         }
-        const contact = new contact_1.default(body);
-        yield contact.save();
-        res.json(contact);
     }
     catch (error) {
         res.status(500).json({
@@ -62,12 +67,13 @@ const putContact = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
     const { id } = req.params;
     try {
         const contact = yield contact_1.default.findByPk(id);
-        const history = new history_1.default(Object.assign(Object.assign({}, body), { 'id_contact': parseInt(id) }));
+        const history = new history_1.default(Object.assign(Object.assign({}, body), { id_contact: parseInt(id) }));
         if (!contact) {
             return res.status(400).json({
                 error: `Contact with ${id} doesn't Exist`
             });
         }
+        // To.do: si ha editado el email ver si ya existe
         yield contact.update(body);
         history.save();
         res.json(contact);

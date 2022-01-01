@@ -16,12 +16,15 @@ const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
 const contacts_routes_1 = __importDefault(require("../routes/contacts.routes"));
 const history_routes_1 = __importDefault(require("../routes/history.routes"));
+const auth_routes_1 = __importDefault(require("../routes/auth.routes"));
 const connections_1 = __importDefault(require("../db/connections"));
+const auth_1 = require("../middlewares/auth");
 class Server {
     constructor() {
         this.paths = {
             contacts: '/api/contacts',
-            history: '/api/history'
+            history: '/api/history',
+            auth: '/api/auth'
         };
         this.app = (0, express_1.default)();
         this.port = process.env.PORT || '3000';
@@ -46,8 +49,9 @@ class Server {
         });
     }
     routes() {
-        this.app.use(this.paths.contacts, contacts_routes_1.default);
-        this.app.use(this.paths.history, history_routes_1.default);
+        this.app.use(this.paths.contacts, auth_1.verifyToken, contacts_routes_1.default);
+        this.app.use(this.paths.history, auth_1.verifyToken, history_routes_1.default);
+        this.app.use(this.paths.auth, auth_routes_1.default);
     }
     listen() {
         this.app.listen(this.port, () => {

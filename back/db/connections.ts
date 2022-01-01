@@ -1,15 +1,14 @@
 import { Sequelize } from 'sequelize'
-import * as pg from 'pg'
+import dotenv from 'dotenv'
 
-const db = new Sequelize('db4ssjebp0ok5k', 'rhkvtuumiuatim', '1df9f105024b8782e929f523cf8d567b41a420ddbcd99a94830a697227978395', {
-  host: 'ec2-3-213-76-170.compute-1.amazonaws.com',
-  dialect: 'postgres',
-  dialectModule: pg,
-  dialectOptions: {
-    ssl: {
-        rejectUnauthorized: false
-    }
-}
+const dbName = dotenv.config().parsed?.DATABASE_NAME || ''
+const dbUser = dotenv.config().parsed?.DATABASE_USERNAME || ''
+const dbPass = dotenv.config().parsed?.DATABASE_PASSWORD || ''
+const dbHost = dotenv.config().parsed?.DATABASE_HOST || ''
+
+const db = new Sequelize(dbName, dbUser, dbPass, {
+  host: dbHost,
+  dialect: 'mariadb'
 })
 
 export default db

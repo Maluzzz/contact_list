@@ -1,3 +1,9 @@
 back/node_modules
+back/dist
+back/.env*
+
 contacts-app/node_modules
+contacts-app/.env.*
+
+.vscode
 
