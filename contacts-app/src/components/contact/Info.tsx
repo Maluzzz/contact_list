@@ -1,16 +1,12 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
-import { useContacts } from '../../hooks/useContacts'
 import { contact } from '../../types'
 
 export default function ContactInfo({
-  name,
-  surname,
-  email,
-  phone
-}: contact) {
-  const { removeContact } = useContacts()
-
+  contact, removeContact
+}: { contact: contact, removeContact: (id: number) => void }) {
+  const { phone, email, surname, name, id } = contact
   return (
     <div className='box '>
       <p className='title'>{name + ' ' + surname}</p>
@@ -20,17 +16,19 @@ export default function ContactInfo({
       <div>
         <span>📞</span> {phone}
       </div>
-      <button
-        className='button is-small is-danger'
-        onClick={() => removeContact(email)}
-      >
-        Remove
-      </button>
-      <a href={'/edit-contact?email=' + email}
-        className='button is-small is-primary'
-      >
-        Edit
-      </a>
+      <hr />
+      <div className='is-flex is-justify-content-space-between is-align-items-center'>
+        <button
+          className='button is-small is-danger'
+          onClick={() => removeContact(parseInt(id))}>
+          Remove
+        </button>
+        <Link to={'/edit-contact?email=' + email}
+          state={{ email, name, surname, phone, id }}
+          className='button is-small is-primary'>
+          Edit
+        </Link>
+      </div>
     </div>
   )
 }

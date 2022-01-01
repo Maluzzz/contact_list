@@ -1,21 +1,15 @@
-import * as React from 'react'
-import { Routes, Route } from 'react-router-dom'
-import Footer from './components/Footer'
-import AddContact from './screens/AddContact'
-import EditContact from './screens/EditContact'
+import React from 'react'
+import AppRouter from './AppRoutes'
+import { UserContext } from './helpers/userContext'
+import { useAuth } from './hooks'
 
-import Home from './screens/Home'
+export const App = () => {
+  const { state, login, signUp, logOut } = useAuth()
 
-function App() {
   return (
-    <div className='App'>
-      <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path='/add-contact' element={<AddContact />} />
-        <Route path='/edit-contact' element={<EditContact />} />
-      </Routes>
-      <Footer />
-    </div>
+    <UserContext.Provider value={{ state, login, signUp, logOut }}>
+      <AppRouter />
+    </UserContext.Provider>
   )
 }
 export default App

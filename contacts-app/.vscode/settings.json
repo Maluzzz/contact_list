@@ -2,5 +2,10 @@
     "html.completion.attributeDefaultValue": "singlequotes",
     "javascript.preferences.quoteStyle": "single",
     "typescript.preferences.quoteStyle": "single",
-    "editor.tabSize": 6
+    "editor.formatOnSave": true,
+    "editor.formatOnType": true,
+    "editor.formatOnPaste": true,
+    "editor.tabSize": 2,
+    "workbench.tree.indent": 2,
+    "eslint.format.enable": true
 }

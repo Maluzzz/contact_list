@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function SearchBar({ onChange }:{onChange: (s:string)=>void}) {
+export function SearchBar({ onChange }: { onChange: (s: string) => void }) {
   return (
     <div>
       <input

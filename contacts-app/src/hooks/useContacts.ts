@@ -1,39 +1,52 @@
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
+import { useLocation } from 'react-router-dom'
+import fetchApiWithToken from '../helpers/api/fetchWithToken'
 
-
-import { setContact } from '../helpers/api/setContact'
-import getList from '../helpers/api/getList'
-import { rmContact } from '../helpers/api/rmContact'
-import { modifyContact } from '../helpers/api/modifyContact'
+import { UserContext } from '../helpers/userContext'
 import { contact } from '../types'
 
-
 export const useContacts = () => {
-  // TO.DO: handle and return all errorMessage
-  const [contacts, setContacts] = useState([])
+  const [{ contacts, isLoading, result }, setContacts] = useState({
+    contacts: [],
+    isLoading: false,
+    result: { error: '', success: '' }
+  })
+
+  const location = useLocation()
+  const { state } = useContext(UserContext)
 
   useEffect(() => {
-    getList().then(( res ) => setContacts(res))
-  }, [])
+    async function getContacts() {
+      setContacts(s => ({ ...s, isLoading: true, contacts: [] }))
+      const response = await fetchApiWithToken('/contacts', 'GET', state.token)
 
-  const addContact = ({ email, name, surname, phone }: contact) => {
-    setContact({ email, name, surname, phone })
-      .then((res) => setContacts(res))
-      .catch((err) => console.error(err))
+      if (response.error) {
+        setContacts(s => ({ ...s, isLoading: false, contacts: [] }))
+      } else {
+        setContacts(s => ({ ...s, isLoading: false, contacts: response }))
+      }
+    }
+    if (location.pathname === '/') {
+      getContacts()
+    }
+  }, []) // TO.DO: REVIEW THIS?
+
+  const removeContact = (id: number) => {
+    const endpoint = `/contacts/${id}`
+    fetchApiWithToken(endpoint, 'DELETE', state.token).then(() => {
+      const contactsFiltered = contacts.filter((contact: contact) => parseInt(contact.id) !== id)
+      setContacts(s => { return { ...s, isLoading: false, contacts: contactsFiltered } })
+    }
+    )
   }
-  const removeContact = ( email:string ) => {
-    // TO.DO HANDLE ERRORS
-    rmContact(email).then(() => {
-      // TO.DO LOOK FOR OTHER WAY TO DO THIS
-      window.location.reload()
+  const postContact = (contact: contact) => {
+    setContacts(s => { return { ...s, isLoading: true, contacts: [] } })
+    fetchApiWithToken('/contacts', 'POST', state.token, contact).then((res) => {
+      return setContacts(s => { return { ...s, result: res, isLoading: false } })
     })
   }
 
-  const editContact = ({ email, name, surname, phone }: contact) => {
-    modifyContact({email, name, surname, phone})
-      .then((res) => setContacts(res))
-      .catch((err) => console.error(err))
-  }
-
-  return { contacts, addContact, removeContact, editContact }
+  return { contacts, isLoading, result, removeContact, postContact }
 }
+
+export default useContacts

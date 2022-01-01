@@ -3,26 +3,24 @@ module.exports = {
     browser: true,
     es2021: true
   },
-  extends: ['plugin:react/recommended', 'google'],
+  extends: [
+    'plugin:react/recommended',
+    'standard'
+  ],
+  parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaFeatures: {
       jsx: true
     },
-    jsx: true,
     ecmaVersion: 13,
     sourceType: 'module'
   },
-  plugins: ['react'],
+  plugins: [
+    'react',
+    '@typescript-eslint'
+  ],
   rules: {
-    'jsx-quotes': ['error', 'prefer-single'],
-    'semi': [2, 'never'],
-    'react/prop-types': 0,
-    'require-jsdoc': 0,
-    'object-curly-spacing': ['warn', 'always'],
-    'comma-dangle': ['error', 'never'],
-    'indent': ['error', 2],
-    'max-len': ['error', { 'code': 140 }],
-    'no-unused-vars': ['warn', { 'vars': 'all', 'args': 'after-used', 'ignoreRestSiblings': false }],
-   'no-trailing-spaces': ['warn', { 'skipBlankLines': true }]
+    'space-before-function-paren': ['error', 'never'],
+    'indent': ['error', 2]
   }
 }
