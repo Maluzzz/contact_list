@@ -19,17 +19,19 @@ export const useContacts = () => {
     async function getContacts() {
       setContacts(s => ({ ...s, isLoading: true, contacts: [] }))
       const response = await fetchApiWithToken('/contacts', 'GET', state.token)
-
-      if (response.error) {
-        setContacts(s => ({ ...s, isLoading: false, contacts: [] }))
-      } else {
-        setContacts(s => ({ ...s, isLoading: false, contacts: response }))
-      }
+      setContacts(s => ({ ...s, isLoading: false, contacts: response.error ? [] : response }))
     }
     if (location.pathname === '/') {
       getContacts()
     }
-  }, []) // TO.DO: REVIEW THIS?
+  }, [location.pathname]) // TO.DO: REVIEW THIS?
+
+  const postContact = (contact: contact) => {
+    setContacts(s => { return { ...s, isLoading: true, contacts: [] } })
+    fetchApiWithToken('/contacts', 'POST', state.token, contact).then((res) => {
+      return setContacts(s => { return { ...s, result: res, isLoading: false } })
+    })
+  }
 
   const removeContact = (id: number) => {
     const endpoint = `/contacts/${id}`
@@ -39,13 +41,6 @@ export const useContacts = () => {
     }
     )
   }
-  const postContact = (contact: contact) => {
-    setContacts(s => { return { ...s, isLoading: true, contacts: [] } })
-    fetchApiWithToken('/contacts', 'POST', state.token, contact).then((res) => {
-      return setContacts(s => { return { ...s, result: res, isLoading: false } })
-    })
-  }
-
   return { contacts, isLoading, result, removeContact, postContact }
 }
 

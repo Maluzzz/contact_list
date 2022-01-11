@@ -1,8 +1,8 @@
 import * as React from 'react'
 import { Routes, Route } from 'react-router-dom'
+
 import Footer from './components/Footer'
 import { PrivateRoute, PublicRoute } from './route'
-
 import { FormScreen, Home, HistoryScreen, LoginScreen, SignUpScreen } from './screens'
 
 function AppRouter() {

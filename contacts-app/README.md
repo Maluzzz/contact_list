@@ -7,9 +7,9 @@
     <br />
   </p>
   <p>
-    <a href="">Back Readme </a>
+    <a href="https://github.com/Maluzzz/contact_list/tree/main/back">Back Readme </a>
     ·
-    <a href="">Front Readme</a>
+    <a href="https://github.com/Maluzzz/contact_list/tree/main/contacts-app">Front Readme</a>
     <br/>
        <a href="https://contacts-app-maaluuz.vercel.app/">
      Try Live on Heroku! </a>

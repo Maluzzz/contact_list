@@ -1,5 +1,6 @@
 import React from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
+
 import { useRecords } from '../../hooks'
 import { history } from '../../types'
 
@@ -13,8 +14,7 @@ export const History = () => {
     <div className='content'>
       <div className='is-flex'>
         <button onClick={() => navigate(-1)}
-          className='button is-small is-primary'
-        >
+          className='button is-small is-primary'>
           Go Back
         </button>
       </div>
@@ -38,7 +38,6 @@ export const History = () => {
               </td>
               <td>{contact.updatedAt}</td>
             </tr>
-
           ))}
         </tbody>
       </table>

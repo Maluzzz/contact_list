@@ -42,7 +42,7 @@ export const LoginForm = () => {
             placeholder='Password' />
         </p>
       </div>
-      <div className=' is-flex  is-justify-content-center'>
+      <div className='is-flex is-justify-content-center'>
         <button className='button is-success'>
           Login
         </button>

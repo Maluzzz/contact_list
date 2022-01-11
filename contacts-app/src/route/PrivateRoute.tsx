@@ -1,5 +1,6 @@
 import React, { useContext } from 'react'
 import { Navigate } from 'react-router-dom'
+
 import { UserContext } from '../helpers/userContext'
 
 export const PrivateRoute = ({ children }: any) => {

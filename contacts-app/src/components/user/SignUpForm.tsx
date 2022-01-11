@@ -1,26 +1,24 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext } from 'react'
 import { UserContext } from '../../helpers/userContext'
+import { useForm } from '../../hooks'
+import { user } from '../../types'
 
 import { MessageBox } from '../MessageBox'
 
 export const SignUpForm = () => {
-  const [formValues, setFormValues] = useState({ email: '', password: '', name: '' })
-
+  const { formValues, handleChange } = useForm({ email: '', password: '', name: '' })
   const { state, signUp } = useContext(UserContext)
 
-  const handleChange = (e: React.ChangeEvent<{ value: string, name: string }>) => {
-    const { name, value } = e.target
-    setFormValues({ ...formValues, [name]: value })
-  }
   const handleSubmit = (e: any) => {
     e.preventDefault()
-    signUp(formValues)
+    const user = formValues as user
+    signUp(user)
   }
 
   return (
     <div>
       <MessageBox message={state.error} isError={true} />
-      {/** TRY TO DO IN A BETTER WAY */}
+      {/** TO.DO: TRY TO DO IN A BETTER WAY */}
       <MessageBox message={state.token === undefined ? 'User Created. Go Login to Access' : state.token} isError={false} />
       <form onSubmit={handleSubmit}>
 

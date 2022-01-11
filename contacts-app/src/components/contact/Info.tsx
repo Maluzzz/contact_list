@@ -11,10 +11,10 @@ export default function ContactInfo({
     <div className='box '>
       <p className='title'>{name + ' ' + surname}</p>
       <div>
-        <span>✉️</span> {email}
+        <span>✉️ </span> {email}
       </div>
       <div>
-        <span>📞</span> {phone}
+        <span>📞 </span> {phone}
       </div>
       <hr />
       <div className='is-flex is-justify-content-space-between is-align-items-center'>

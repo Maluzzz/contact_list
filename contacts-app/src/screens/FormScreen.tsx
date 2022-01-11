@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 
 import { useForm, useContacts } from '../hooks'
 import { contact } from '../types'
-import { MessageBox } from '../components/MessageBox' // TO.DO INDEX
+import { MessageBox } from '../components/MessageBox'
 import { LogOut } from '../components/user/LogOut'
 import { Form } from '../components/contact'
 
@@ -23,7 +23,6 @@ export const FormScreen = () => {
     }
 
   const { formValues, handleChange, resetForm } = useForm(contactInfo)
-
   const { postContact, result, isLoading } = useContacts()
 
   useEffect(() => {

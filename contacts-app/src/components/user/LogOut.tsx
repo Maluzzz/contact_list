@@ -1,4 +1,5 @@
 import React, { useContext } from 'react'
+
 import { UserContext } from '../../helpers/userContext'
 
 export const LogOut = () => {

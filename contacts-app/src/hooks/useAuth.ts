@@ -8,18 +8,18 @@ export const useAuth = () => {
   const [state, setState] = useState({ token: localStorage.getItem('token') || '', error: '' })
 
   useEffect(() => {
+    // TO.DO: IMPROVEMENT: To avoid send a request every time
+    // we can save the token's timestamp to know if the token has expired
+    async function fetchToken() {
+      const token = await refreshToken(state.token)
+      if (token.error) {
+        localStorage.removeItem('token')
+      }
+    }
     if (state.token === '') {
       return
     }
-    // IMPROVEMENT: To avoid send a request every time
-    // we can save the timeStamp to know if the token has expired
-    refreshToken(state.token).then(res => {
-      if (res.error) {
-        localStorage.removeItem('token')
-      } else {
-        // PERFE
-      }
-    })
+    fetchToken()
   }, [state.token])
 
   const login = (user: user) => {

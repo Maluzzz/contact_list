@@ -1,6 +1,6 @@
 import React from 'react'
-import { contact } from '../../types'
 
+import { contact } from '../../types'
 import ContactInfo from './Info'
 
 export const ContactList = ({ contacts, removeContact }: { contacts: contact[], removeContact: (id: number) => void }) => {
