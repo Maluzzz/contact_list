@@ -7,27 +7,13 @@
     <br />
   </p>
   <p>
-    <a href="">Back Readme </a>
+      <a href="https://github.com/Maluzzz/contact_list/tree/main/back">Back Setup </a>
     ·
-    <a href="">Front Readme</a>
+    <a href="https://github.com/Maluzzz/contact_list/tree/main/contacts-app">App Setup</a>
     <br/>
-       <a href="https://contacts-app-maaluuz.vercel.app/">
-     Try Live on Heroku! </a>
+      <a href="https://contacts-app-maaluuz.vercel.app/">
+     Try the World Agenda on Heroku! </a>
     </p>
-    
- 
+    </p>
 </div>
-
-<hr/>
-
-## What Did I use?
-
-This section list frameworks & libraries used to bootstrap the project. 
-
-* [React.js](https://reactjs.org/)
-
-## Getting Started
-
-* [Setup Bakend]()
-* [Setup Frontend]()
 
