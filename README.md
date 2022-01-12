@@ -2,8 +2,8 @@
 
   <h1 align="center">World Agenda 🌍️</h3>
 
-  <p align="left">
-     Full-stack app to have a community contact list. Made using React, Typescript, MariaDB, Node and Express. (MERN STACK)
+  <p align="center">
+    App to build a world agenda. 
     <br />
   </p>
   <p>
