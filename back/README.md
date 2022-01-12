@@ -1,6 +1,8 @@
 # API with Node + Express + DB using Typescript
 
-Simple API to get/edit contacts, check changes history and auth the user with jwt 
+Simple API to get contacts and edit contacts.
+Changes are audited and the change history can be checked.
+All endpoints requires authentication.
 
 
 ## ⚙️ Built with
@@ -14,18 +16,18 @@ Simple API to get/edit contacts, check changes history and auth the user with jw
 
 ## Requirements
 
-You need installed [Node.js](https://nodejs.org/en/)
+Install [Node.js](https://nodejs.org/en/)
 
 
 ## Getting Started
 
 ### Install MariaDB and SetUp
 
-1. Option 1: You can do this from the [main documentation](https://mariadb.org/download/?t=mariadb&p=mariadb&r=10.6.5&os=Linux&cpu=x86_64&pkg=tar_gz&i=systemd&m=ptisp)
+1. Option 1: Install using the main documentation [main documentation](https://mariadb.org/download/?t=mariadb&p=mariadb&r=10.6.5&os=Linux&cpu=x86_64&pkg=tar_gz&i=systemd&m=ptisp)
 
-2. Option 2: Use the installer [Xampp](https://www.apachefriends.org/index.html) and the visual interface phpmyadmin
+2. Option 2: Use [Xampp](https://www.apachefriends.org/index.html) and get the advantage of the UI (phpmyadmin)
 
-3. This are the main sentences to create the DB for mariaDB
+3. Following the main commands to create the DB for mariaDB
  
 <br/>
 
@@ -35,7 +37,7 @@ You need installed [Node.js](https://nodejs.org/en/)
 ```
 git clone https://github.com/Maluzzz/contact_list.git
 ```
-2. Locate in the back folder
+2. Move to the backend folder
 ```
 cd back
 ```
@@ -56,9 +58,9 @@ DATABASE_PASSWORD=
 DATABASE_HOST=
 ```
 
-5. Run the app with typescript checking
+5. Run the app with typescript
 ```
-tsc --watch
+``tsc --watch``
 nodemon dist/App.js
 ```
    
@@ -84,43 +86,38 @@ Here are the endpoints and how to use:
 
 ### `GET` /api/contacts
 
-Get all the contacts saved
+Get all the contacts
 
 
 ```jsx
-var myHeaders = new Headers();
+const myHeaders = new Headers();
 myHeaders.append("x-token", "TOKEN_JWT");
 myHeaders.append("Content-Type", "application/json");
 
-var requestOptions = {
+const requestOptions = {
   method: 'POST',
   headers: myHeaders,
   redirect: 'follow'
 };
-fetch("localhost:3000/api/contacts",requestOptions)
-  .then((response) => {
-    if (response.status === 200) {
-      response.json().then((j) => console.log(j));
-    } else {
-      console.log("ERROR", response.status);
-    }
-  })
+
+fetch("localhost:3000/api/contacts", requestOptions)
+  .then((response) => response.json())
   .catch((error) => console.log(error));
 ```
 
 ### `POST` /api/contacts
 
-Upsert endpoint: create contact if the email doesn't exist. If the email existed the endpoint will update the contact
+Upsert endpoint: create contact if the email doesn't exist. If the email exists the endpoint will update the contact
 
 
 ```jsx
-var myHeaders = new Headers();
+const myHeaders = new Headers();
 myHeaders.append("x-token", "JWT_TOKEN");
 myHeaders.append("Content-Type", "application/json");
 
-var raw = JSON.stringify({"name":"name","email":"name@gmail.com","phone":"+666444666","surname":"surname"});
+const raw = JSON.stringify({"name":"John", "email":"john@gmail.com", "phone":"+666444666", "surname":"Smith"});
 
-var requestOptions = {
+const requestOptions = {
   method: 'POST',
   headers: myHeaders,
   body: raw,
@@ -128,8 +125,7 @@ var requestOptions = {
 };
 
 fetch("localhost:3000/api/contacts", requestOptions)
-  .then(response => response.text())
-  .then(result => console.log(result))
+  .then(response => response.json())
   .catch(error => console.log('error', error));
 ```
 
@@ -149,13 +145,7 @@ var requestOptions = {
 };
 
 fetch("localhost:3000/api/contacts/id", requestOptions)
-  .then((response) => {
-    if (response.status === 200) {
-      response.json().then((j) => console.log(j));
-    } else {
-      console.log("ERROR", response.status);
-    }
-  })
+  .then((response) => response.json())
   .catch((error) => console.log(error));
 ```
 </details>
@@ -178,13 +168,7 @@ myHeaders.append("Content-Type", "application/json");
 
 
 fetch("localhost:3000/api/history/:id", requestOptions)
-  .then((response) => {
-    if (response.status === 200) {
-      response.json().then((j) => console.log(j));
-    } else {
-      console.log("ERROR", response.status);
-    }
-  })
+  .then((response) => response.json())
   .catch((error) => console.log(error));
 ```
 </details>
@@ -213,8 +197,7 @@ var requestOptions = {
 };
 
 fetch("localhost:3000/api/auth/login", requestOptions)
-  .then(response => response.text())
-  .then(result => console.log(result))
+  .then(response => response.json())
   .catch(error => console.log('error', error));
 ```
 <br/>
@@ -227,7 +210,7 @@ Register a user in the db
 var myHeaders = new Headers();
 myHeaders.append("Content-Type", "application/json");
 
-var raw = JSON.stringify({"name":"name","email":"name@gmail.com","password":"password"});
+var raw = JSON.stringify({"name":"name", "email":"name@gmail.com", "password":"password"});
 
 var requestOptions = {
   method: 'POST',
@@ -237,8 +220,7 @@ var requestOptions = {
 };
 
 fetch("localhost:3000/api/auth/signup", requestOptions)
-  .then(response => response.text())
-  .then(result => console.log(result))
+  .then(response => response.json())
   .catch(error => console.log('error', error));
 ```
 
@@ -257,8 +239,7 @@ var requestOptions = {
 };
 
 fetch("localhost:3000/api/auth/refresh-token", requestOptions)
-  .then(response => response.text())
-  .then(result => console.log(result))
+  .then(response => response.json())
   .catch(error => console.log('error', error));
 ```
 </details>
